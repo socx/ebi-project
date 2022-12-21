@@ -39,18 +39,13 @@ const PORT = process.env.PORT || 3008;
 const appVersion = process.env.npm_package_version;
 const appStatus = function (req, res) {
   res.sendFile(__dirname + "/index.html");
-  // res.json({
-
-  //   status: 'API is up and running',
-  //   message: `Welcome to the beginning of a miracle (v ${appVersion})`
-  // });
 }
 app.get('/', appStatus);
 app.get('/api', appStatus);
 
-
 // ROUTES
 app.use("/api/people", peopleRoutes);
+app.use('/images', express.static(__dirname+'/photos/'));
 
 // Launch server
 app.listen(PORT, function () {

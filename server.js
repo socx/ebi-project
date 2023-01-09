@@ -33,7 +33,7 @@ app.use((err, req, res, next) => {
 });
 
 // Set up port for server to listen on
-const PORT = process.env.PORT || 3008;
+const PORT = process.env.PORT || 3009;
 
 // Send message for default URLs
 const appVersion = process.env.npm_package_version;

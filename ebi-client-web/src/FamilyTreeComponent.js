@@ -55,15 +55,15 @@ FamilyTree.templates.main.node = '<rect x="0" y="0" height="{h}" width="{w}" fil
     '<rect x="0" y="0" height="20" width="{w}" fill="#b1b9be" stroke-width="1" stroke="#b1b9be" rx="5" ry="5"></rect>' +
     '<line x1="0" y1="20" x2="250" y2="20" stroke-width="5" stroke="#b1b9be"></line>';
 
-// field definitiona
+// field definition
 FamilyTree.templates.main.field_0 =
     '<text ' + FamilyTree.attr.width + ' ="250" style="font-size: 14px;" font-variant="all-small-caps" fill="white" x="125" y="16" text-anchor="middle">{val}</text>';
 FamilyTree.templates.main.field_name =
-    '<text ' + FamilyTree.attr.width + ' ="160" data-text-overflow="multiline" style="font-size: 14px;" fill="black" x="100" y="66" text-anchor="start">{val}</text>';
+    '<text ' + FamilyTree.attr.width + ' ="160" data-text-overflow="multiline" style="font-size: 15px;" fill="black" x="100" y="66" text-anchor="start">{val}</text>';
 FamilyTree.templates.main.field_bdate =
-    '<text ' + FamilyTree.attr.width + ' ="160" style="font-size: 10px;" fill="#b1b9be" x="100" y="95" text-anchor="start">{val}</text>';
-FamilyTree.templates.main.field_id =
-    '<text ' + FamilyTree.attr.width + ' ="60" style="font-size: 12px;" fill="black" x="47" y="112" text-anchor="middle">{val}</text>';
+    '<text ' + FamilyTree.attr.width + ' ="160" style="font-size: 13px;" fill="black" x="100" y="95" text-anchor="start">{val}</text>';
+// FamilyTree.templates.main.field_id =
+//     '<text ' + FamilyTree.attr.width + ' ="60" style="font-size: 12px;" fill="#b1b9be" x="47" y="112" text-anchor="middle">{val}</text>';
 FamilyTree.templates.main.img_0 =
     `<use xlink:href="#base_img_0_stroke" /> 
        <circle id="base_img_0_stroke" fill="#b1b9be" cx="45" cy="62" r="37"/>
@@ -113,8 +113,8 @@ FamilyTree.templates.single.node =
     '<circle cx="100" cy="100" r="100" fill="white" stroke-width="1" stroke="#aeaeae"></circle>';
 FamilyTree.templates.single.field_0 = '<text ' + FamilyTree.attr.width + ' ="160" style="font-size: 14px;" font-variant="all-small-caps"  font-weight="bold" fill="black" x="100" y="115" text-anchor="middle">{val}</text>';
 FamilyTree.templates.single.field_name = '<text ' + FamilyTree.attr.width + ' ="190" data-text-overflow="multiline" style="font-size: 16px;" fill="black" x="100" y="135" text-anchor="middle">{val}</text>';
-FamilyTree.templates.single.field_id =
-    '<text ' + FamilyTree.attr.width + ' ="60" style="font-size: 12px;" fill="black" x="100" y="180" text-anchor="middle">{val}</text>';
+// FamilyTree.templates.single.field_id =
+//     '<text ' + FamilyTree.attr.width + ' ="60" style="font-size: 12px;" fill="black" x="100" y="180" text-anchor="middle">{val}</text>';
 FamilyTree.templates.single.nodeMenuButton = `<use ${FamilyTree.attr.control_node_menu_id}="{id}" x="89" y="5" xlink:href="#base_node_menu" />`;
 FamilyTree.templates.single_male = Object.assign({}, FamilyTree.templates.single);
 FamilyTree.templates.single_male.node = '<circle cx="100" cy="100" r="100" fill="white" stroke-width="3" stroke="#6bb4df" ></circle>';
@@ -161,6 +161,29 @@ export default class FamilyTreeComponent extends Component {
                 details: { text: "Details" }
             },
             orderBy: "orderId",
+            editForm: {
+                generateElementsFromFields: false,
+                elements: [
+                    { type: 'textbox', label: 'Unique Id', binding: 'id'},
+                    { type: 'textbox', label: 'First Name', binding: 'firstname'},
+                    { type: 'textbox', label: 'Middle Name', binding: 'middlename'},
+                    { type: 'textbox', label: 'Last Name', binding: 'surname'},
+                    { type: 'textbox', label: 'Date of Birth', binding: 'bdate'},
+                    { type: 'textbox', label: 'Gender', binding: 'gender'}         
+                ],
+                buttons: {
+                    edit: null,
+                    share: {
+                        icon: FamilyTree.icon.share(24, 24, '#fff'),
+                        text: 'Share'
+                    },
+                    pdf: {
+                        icon: FamilyTree.icon.pdf(24, 24, '#fff'),
+                        text: 'Save as PDF'
+                    },
+                    remove: null
+                }
+            },
             tags: {
                 "single_male": {
                     template: "single_male"

@@ -27,6 +27,7 @@
       "firstname": "Olamide",
       "middlename": "Adesola",
       "surname": "Oderinde",
+      "maidenname": "Ajibola",
       "dob": "1982-09-26"
   },
   {
@@ -77,7 +78,9 @@
       "firstname": "Esther",
       "middlename": "Oyenike",
       "surname": "Oderinde",
-      "dob": "1952-04-28"
+      "maidenname": "Akingbehin",
+      "dob": "1952-04-28",
+      "dod": "2022-01-16"
   },
   {
       "id": 7,
@@ -115,6 +118,7 @@
       "firstname": "Oluwakemi",
       "middlename": "Oyetayo",
       "surname": "Abejide",
+      "maidenname": "Oderinde",
       "dob": "1975-09-07"
   },
   {
@@ -139,6 +143,7 @@
       "firstname": "Olubusayo",
       "middlename": "Oyedunmola",
       "surname": "Olabode-Dada",
+      "maidenname": "Oderinde",
       "dob": "1984-03-11"
   },
   {
@@ -175,6 +180,7 @@
       "firstname": "Sinmisola",
       "middlename": "Adenike",
       "surname": "Gadi",
+      "maidenname": "Ajibola",
       "dob": "1987-01-15"
   },
   {
@@ -255,7 +261,8 @@
       "firstname": "Tosan",
       "middlename": "",
       "surname": "Oderinde",
-      "dob": ""
+      "maidenname": "Omaghomi",
+      "dob": "1979-04-13"
   },
   {
       "id": 21,
@@ -612,7 +619,7 @@
     "firstname": "Kehinde",
     "middlename": "",
     "surname": "Olaniyan",
-    "dob": "1960-04-22"
+    "dob": "1968-08-12"
   },
   {
     "id": 53,

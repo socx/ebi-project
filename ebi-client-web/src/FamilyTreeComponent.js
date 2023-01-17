@@ -155,19 +155,21 @@ export default class FamilyTreeComponent extends Component {
         this.family = new FamilyTree (this.divRef.current , {
             nodes: this.props.nodes,
             template: "main",
-            scaleInitial: FamilyTree.match.boundary,
-            mouseScrool: FamilyTree.action.none,
+            scaleInitial: 0.7,
+            // scaleInitial: FamilyTree.match.boundary,
+            // mouseScrool: FamilyTree.action.none,
             nodeMenu: {
                 details: { text: "Details" }
             },
-            orderBy: "orderId",
+            orderBy: "id",
             editForm: {
                 generateElementsFromFields: false,
                 elements: [
-                    { type: 'textbox', label: 'Unique Id', binding: 'id'},
+                    // { type: 'textbox', label: 'Unique Id', binding: 'id'},
                     { type: 'textbox', label: 'First Name', binding: 'firstname'},
                     { type: 'textbox', label: 'Middle Name', binding: 'middlename'},
                     { type: 'textbox', label: 'Last Name', binding: 'surname'},
+                    { type: 'textbox', label: 'Maiden Name', binding: 'maidenname'},
                     { type: 'textbox', label: 'Date of Birth', binding: 'bdate'},
                     { type: 'textbox', label: 'Gender', binding: 'gender'}         
                 ],

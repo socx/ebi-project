@@ -6,7 +6,6 @@ import './templates/john';
 import './templates/main';
 
 
-
 export default class FamilyTreeComponent extends Component {
 
     constructor(props) {
@@ -14,17 +13,20 @@ export default class FamilyTreeComponent extends Component {
         this.divRef = React.createRef();
     }
 
-    shouldComponentUpdate() {
-        return false;
+    componentDidUpdate () {debugger
+        this.drawTree();
     }
 
     componentDidMount() {
+        this.drawTree();
+    }
+
+    drawTree() {
+        const { nodes, selectedZoom } = this.props;debugger
         this.family = new FamilyTree (this.divRef.current , {
-            nodes: this.props.nodes,
+            nodes: nodes,
             template: "main",
-            // scaleInitial: FamilyTree.match.height,
-            // scaleInitial: FamilyTree.match.boundary,
-            scaleInitial: 0.7,
+            scaleInitial: selectedZoom === 0.1 ? FamilyTree.match.boundary : selectedZoom,
             mouseScrool: FamilyTree.action.none,
             nodeMenu: {
                 details: { text: "Details" }

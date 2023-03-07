@@ -28,7 +28,7 @@ const DemoModalComponent = (props) => {
           You can also click anywhere inside the app window and drag horizontally and/or vertically 
           to see parts of the family tree that may not visible at any time.
         </p>
-        <video width="1000" height="750" preload="true" controls >
+        <video width="750" height="500" preload="true" controls >
           <source src={require('./../videos/ebi_demo.mp4')} type="video/mp4"/>
         </video>
       </Modal.Body>

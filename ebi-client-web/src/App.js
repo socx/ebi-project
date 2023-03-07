@@ -3,8 +3,10 @@ import React, { Component } from 'react';
 import FamilyTreeComponent from './FamilyTreeComponent';
 import DemoModalComponent from './components/DemoModalComponent';
 import NavigationComponent from './components/NavigationComponent';
+import BirthDayToasterComponent from './components/BirthDayToasterComponent'; 
 
 import { API_ROOT, REMOTE_API_ROOT } from './constants/utils';
+import { getMonthlyBirthdayCelebrants } from './utils/utils';
 
 import './App.css';
 
@@ -16,10 +18,12 @@ export default class AppMe extends Component {
     this.state = {
       familyTreeNodes: [],
       isDemoModalVisible: false,
+      isBirthdayToasterVisible: false,
+      monthlyBirthdayCelebrants: [],
       selectedZoom: 1,
     };
     this.selectedZoomChanged = this.selectedZoomChanged.bind(this);
-    this.setModalShow = this.setModalShow.bind(this);
+    this.setIsDemoModalVisible = this.setIsDemoModalVisible.bind(this);
   }
 
   selectedZoomChanged(value) {
@@ -27,45 +31,70 @@ export default class AppMe extends Component {
     this.setState({...this.state, selectedZoom});
   }
 
-  setModalShow(value) {debugger
+  setIsDemoModalVisible(value) {
     const isDemoModalVisible = Boolean(value);
     this.setState({...this.state, isDemoModalVisible});
+  }
+
+  setIsBirthdayToasterVisible(value) {
+    const isBirthdayToasterVisible = Boolean(value);
+    this.setState({...this.state, isBirthdayToasterVisible});
   }
 
   componentDidMount() {
     fetch(`${apiRoot}/people/family-tree/1`)
       .then((response) => response.json())
       .then((json) => {
-        this.setState({familyTreeNodes: json});
+        const familyTreeNodes = json;
+        const monthlyBirthdayCelebrants = getMonthlyBirthdayCelebrants(json);
+        const isBirthdayToasterVisible = monthlyBirthdayCelebrants.length >0;
+        
+        this.setState({
+          familyTreeNodes,
+          monthlyBirthdayCelebrants,
+          isBirthdayToasterVisible
+        });
       });
   }
 
   render() {
-    const { familyTreeNodes, isDemoModalVisible, selectedZoom } = this.state;
-      return (
-        <>
-          <NavigationComponent
-            setModalShow={this.setModalShow}
-            selectedZoomChanged={this.selectedZoomChanged}
-          />
+    const {
+      familyTreeNodes,
+      isDemoModalVisible,
+      isBirthdayToasterVisible,
+      monthlyBirthdayCelebrants,
+      selectedZoom
+    } = this.state;
 
-          <div className="flex-container">
-            <h1 className="text-center text-light">Family Tree</h1>
-          </div>
-          <div style={{height: '100%'}}>
-            {familyTreeNodes && familyTreeNodes.length &&
-              <FamilyTreeComponent nodes={familyTreeNodes} selectedZoom={selectedZoom} />
-            }
-          </div>
-          <DemoModalComponent
-            backdrop="static"
-            fullscreen={true}
-            keyboard={false}
-            show={isDemoModalVisible}
-            onHide={() => this.setModalShow(false)}
-          />
-        </>
-      );
+    return (
+      <>
+        <NavigationComponent
+          setIsDemoModalVisible={this.setIsDemoModalVisible}
+          selectedZoomChanged={this.selectedZoomChanged}
+        />
+
+        <div className="flex-container">
+          <h1 className="text-center text-light">Family Tree</h1>
+        </div>
+        <div style={{height: '100%'}}>
+          {familyTreeNodes && familyTreeNodes.length &&
+            <FamilyTreeComponent nodes={familyTreeNodes} selectedZoom={selectedZoom} />
+          }
+        </div>
+        <DemoModalComponent
+          backdrop="static"
+          fullscreen={true}
+          keyboard={false}
+          show={isDemoModalVisible}
+          onHide={() => this.setIsDemoModalVisible(false)}
+        />
+        <BirthDayToasterComponent
+          setIsBirthdayToasterVisible={() => this.setIsBirthdayToasterVisible(false)}
+          isBirthdayToasterVisible={isBirthdayToasterVisible}
+          monthlyBirthdayCelebrants={monthlyBirthdayCelebrants}
+        />
+      </>
+    );
   }
 }
 

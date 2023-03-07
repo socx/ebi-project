@@ -6,13 +6,13 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
 
 const options = [
-  { label: '100%', value: 1 },
-  { label: '50%', value: .5 },
   { label: '25%', value: .25 },
-  { label: 'fit to screen', value: 0.1 }
+  { label: '50%', value: .5 },
+  { label: '75%', value: .75 },
+  { label: '100%', value: 1 },
 ];
 
-const NavigationComponent = ({selectedZoomChanged, setModalShow}) => {
+const NavigationComponent = ({selectedZoomChanged, setIsDemoModalVisible}) => {
   return (
     <>
       <Navbar variant="dark" bg="dark" expand="lg">
@@ -31,7 +31,7 @@ const NavigationComponent = ({selectedZoomChanged, setModalShow}) => {
           <Navbar.Collapse id="navbar-dark">
             <Nav>
               <Nav.Link
-                onClick={()=> setModalShow(true) }
+                onClick={()=> setIsDemoModalVisible(true) }
               >
                 Help
               </Nav.Link>
@@ -44,6 +44,8 @@ const NavigationComponent = ({selectedZoomChanged, setModalShow}) => {
                 {options.map(({ value, label}) => {
                   return <NavDropdown.Item key={value} eventKey={value}>{label}</NavDropdown.Item>
                 })}
+                <NavDropdown.Divider />
+                <NavDropdown.Item key="0.1" eventKey="0.1">Fit to Screen</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>

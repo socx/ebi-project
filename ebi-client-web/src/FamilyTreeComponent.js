@@ -13,7 +13,7 @@ export default class FamilyTreeComponent extends Component {
         this.divRef = React.createRef();
     }
 
-    componentDidUpdate () {debugger
+    componentDidUpdate () {
         this.drawTree();
     }
 
@@ -22,7 +22,7 @@ export default class FamilyTreeComponent extends Component {
     }
 
     drawTree() {
-        const { nodes, selectedZoom } = this.props;debugger
+        const { nodes, selectedZoom } = this.props;
         this.family = new FamilyTree (this.divRef.current , {
             nodes: nodes,
             template: "main",

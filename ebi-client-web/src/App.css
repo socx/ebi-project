@@ -13,3 +13,13 @@ html, body{
 .mini-map {
   bottom: 45px !important;
 }
+
+.flex-container {
+  /* background-color: rgba(0, 0, 0, .5) */
+  background-color: #3A98B9;
+}
+
+.flex-container h1{
+    color: white;
+    opacity: 1;
+}

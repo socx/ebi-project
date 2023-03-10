@@ -2,11 +2,9 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
-import * as dayjs from 'dayjs';
+import AnniversaryToasterComponent from './AnniversaryToasterComponent';
 
-import BirthDayToasterComponent from './BirthDayToasterComponent';
-
-describe('BirthDayToasterComponent', () => {
+describe('AnniversaryToasterComponent', () => {
 
   const birthdayCelebrants = [
     '1st March - Joe Bloggs',
@@ -14,15 +12,12 @@ describe('BirthDayToasterComponent', () => {
   ];
 
   test('renders the component', () => {
-    jest.mock('dayjs', () => {
-      format: jest.fn().mockImplementation((d) => d === 'D' ? '01' : 'March')
-    })
     const props = {
       birthdayCelebrants: birthdayCelebrants,
       isBirthdayToasterVisible: true,
       setIsBirthdayToasterVisible: ()=> {}
     };
-    const container = render(<BirthDayToasterComponent {...props} />);
+    const container = render(<AnniversaryToasterComponent {...props} />);
     expect(container.firstChild).toMatchSnapshot();
   });
 });

@@ -3,8 +3,6 @@ import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
 import AppMe from './App';
-import BirthDayToasterComponent from './components/BirthDayToasterComponent';
-import NavigationComponent from './components/NavigationComponent';
 
 describe('App', () => {
   const { getByTestId } = screen
@@ -24,4 +22,4 @@ describe('App', () => {
     expect(getByTestId('navbar-brand-image')).toBeInTheDocument();
   });
 
-})
+});

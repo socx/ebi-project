@@ -1,72 +1,83 @@
+import dayjs from 'dayjs'
+
 import {
-  isBirthdayCurrentMonth,
-  getMonthlyBirthdayCelebrants,
+  getAnniversaryCelebrantsByMonth,
   getOrdinalSuffix,
 } from './utils';
 
-import * as utils from './utils';
+import {
+  ANNIVERSARY_FIELD_BIRTHDAY,
+  ANNIVERSARY_FIELD_WEDDING,
+  API_ROOT,
+  REMOTE_API_ROOT
+} from './../constants/utils';
 
 
-describe('isBirthdayCurrentMonth', () => {
+describe('getAnniversaryCelebrantsByMonth', () => {
   beforeAll(() => {
-    jest.spyOn(Date, 'now').mockImplementation(() => 1401667200000); // 2014-06-02
+    jest.spyOn(Date, 'now').mockImplementation(() => 1291939200000); // 2010-12-10
   });
 
-  afterAll(() => {
-    jest.restoreAllMocks
-  });
-
-  test('should return true for correct data', () => {
-    expect(isBirthdayCurrentMonth(new Date('2019-06-27'))).toBe(true);
-  });
-  
-  test('should return false for correct data', () => {
-    expect(isBirthdayCurrentMonth(new Date('2018-10-27'))).toBe(false);
-  });
-});
-
-describe('getMonthlyBirthdayCelebrants', () => {
-  beforeAll(() => {
-    jest.spyOn(Date, 'now').mockImplementation(() => 1401667200000); // 2014-06-02
-  });
-
-  afterAll(() => {
-    jest.restoreAllMocks
-  });
-  
-  test('should return the birthday failling within the current month', () => {
+  test('should return list of wedding anniversary celebrants', () => {
     const people = [
       {
         firstname: 'Joe',
         surname: 'Bloggs',
-        dob: '1914-06-01'
+        dow: '1788-12-30'
       },
       {
         firstname: 'Jane',
         surname: 'Bloggs',
-        dob: '1978-10-01'
+        dow: '1965-12-01'
       },
       {
         firstname: 'Peter',
         surname: 'Pan',
-        dob: '2017-06-11'
+        dow: '2010-04-21'
       }
     ];
 
-    const expectedBirthdays = [
+    const expectedList = [
+      '30th December - Joe Bloggs',
+      '1st December - Jane Bloggs',
+    ];
+
+    const actualList = getAnniversaryCelebrantsByMonth(people, ANNIVERSARY_FIELD_WEDDING);
+    expect(actualList).toEqual(expectedList);
+    expect(new Set(actualList)).toEqual(new Set(expectedList));
+    expect(actualList).toEqual(expect.arrayContaining(expectedList));
+  });
+
+  test('should return list of birthday celebrants', () => {
+    const people = [
       {
         firstname: 'Joe',
         surname: 'Bloggs',
-        dob: '1914-06-01'
+        dob: '1891-12-31'
+      },
+      {
+        firstname: 'Jane',
+        surname: 'Bloggs',
+        dob: '1988-12-03'
       },
       {
         firstname: 'Peter',
         surname: 'Pan',
-        dob: '2017-06-11'
+        dob: '2010-04-21'
       }
     ];
-    expect(getMonthlyBirthdayCelebrants(people)).toStrictEqual(expectedBirthdays);
+
+    const expectedList = [
+      '31st December - Joe Bloggs',
+      '3rd December - Jane Bloggs',
+    ];
+
+    const actualList = getAnniversaryCelebrantsByMonth(people, ANNIVERSARY_FIELD_BIRTHDAY);
+    expect(actualList).toEqual(expectedList);
+    expect(new Set(actualList)).toEqual(new Set(expectedList));
+    expect(actualList).toEqual(expect.arrayContaining(expectedList));
   });
+
 });
 
 describe('getOrdinalSuffix', () => {

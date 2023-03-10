@@ -3,10 +3,15 @@ import React, { Component } from 'react';
 import FamilyTreeComponent from './FamilyTreeComponent';
 import DemoModalComponent from './components/DemoModalComponent';
 import NavigationComponent from './components/NavigationComponent';
-import BirthDayToasterComponent from './components/BirthDayToasterComponent'; 
+import BirthDayToasterComponent from './components/AnniversaryToasterComponent'; 
 
-import { API_ROOT, REMOTE_API_ROOT } from './constants/utils';
-import { getMonthlyBirthdayCelebrants, getBirthdayCelebrantsList } from './utils/utils';
+import {
+  ANNIVERSARY_FIELD_BIRTHDAY,
+  ANNIVERSARY_FIELD_WEDDING,
+  API_ROOT,
+  REMOTE_API_ROOT
+} from './constants/utils';
+import { getAnniversaryCelebrantsByMonth } from './utils/utils';
 
 import './App.css';
 
@@ -16,10 +21,12 @@ export default class AppMe extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      familyTreeNodes: [],
-      isDemoModalVisible: false,
+      anniversaryCelebrants: [],
+      birthdayCelebrants:[],
+      isAnniversaryToasterVisible: false,
       isBirthdayToasterVisible: false,
-      monthlyBirthdayCelebrants: [],
+      isDemoModalVisible: false,
+      familyTreeNodes: [],
       selectedZoom: 1,
     };
     this.selectedZoomChanged = this.selectedZoomChanged.bind(this);
@@ -41,18 +48,25 @@ export default class AppMe extends Component {
     this.setState({...this.state, isBirthdayToasterVisible});
   }
 
+  setIsAnniversaryToasterVisible(value) {
+    const isAnniversaryToasterVisible = Boolean(value);
+    this.setState({...this.state, isAnniversaryToasterVisible});
+  }
+
   componentDidMount() {
     fetch(`${apiRoot}/people/family-tree/1`)
       .then((response) => response.json())
       .then((json) => {
         const familyTreeNodes = json;
-        const monthlyBirthdayCelebrants = getMonthlyBirthdayCelebrants(json);
-        const birthdayCelebrants = getBirthdayCelebrantsList(monthlyBirthdayCelebrants);
-        const isBirthdayToasterVisible = birthdayCelebrants.length >0;
-        
+        const birthdayCelebrants = getAnniversaryCelebrantsByMonth(json, ANNIVERSARY_FIELD_BIRTHDAY);
+        const isBirthdayToasterVisible = birthdayCelebrants.length > 0;
+        const anniversaryCelebrants = getAnniversaryCelebrantsByMonth(json, ANNIVERSARY_FIELD_WEDDING);
+        const isAnniversaryToasterVisible = anniversaryCelebrants.length > 0;
         this.setState({
-          familyTreeNodes,
+          anniversaryCelebrants,
           birthdayCelebrants,
+          familyTreeNodes,
+          isAnniversaryToasterVisible,
           isBirthdayToasterVisible
         });
       });
@@ -60,10 +74,12 @@ export default class AppMe extends Component {
 
   render() {
     const {
-      familyTreeNodes,
-      isDemoModalVisible,
-      isBirthdayToasterVisible,
+      anniversaryCelebrants,
       birthdayCelebrants,
+      isAnniversaryToasterVisible,
+      isBirthdayToasterVisible,
+      isDemoModalVisible,
+      familyTreeNodes,
       selectedZoom
     } = this.state;
 
@@ -92,9 +108,12 @@ export default class AppMe extends Component {
         />
         {birthdayCelebrants && birthdayCelebrants.length &&
            <BirthDayToasterComponent
-           setIsBirthdayToasterVisible={() => this.setIsBirthdayToasterVisible(false)}
+           isAnniversaryToasterVisible={isAnniversaryToasterVisible}
            isBirthdayToasterVisible={isBirthdayToasterVisible}
            birthdayCelebrants={birthdayCelebrants}
+           anniversaryCelebrants={anniversaryCelebrants}
+           setIsAnniversaryToasterVisible={() => this.setIsAnniversaryToasterVisible(false)}
+           setIsBirthdayToasterVisible={() => this.setIsBirthdayToasterVisible(false)}
          />
         }
        

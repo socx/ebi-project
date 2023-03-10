@@ -1,4 +1,9 @@
-import * as dayjs from 'dayjs'
+import  dayjs from 'dayjs';
+
+import {
+  ANNIVERSARY_FIELD_BIRTHDAY,
+} from './../constants/utils';
+
 
 export const checkIfImageExists = (url, callback) => {
   const img = new Image();
@@ -17,19 +22,13 @@ export const checkIfImageExists = (url, callback) => {
   }
 }
 
-export const isBirthdayCurrentMonth = (date) => {
-  return date.getMonth() === (new Date(Date.now())).getMonth();
-}
-
-export const getMonthlyBirthdayCelebrants = (people) => {
-  return  people.filter((person) => {
-    return person.dob && isBirthdayCurrentMonth(new Date(person.dob))
+export const getAnniversaryCelebrantsByMonth = (people, anniversaryField = ANNIVERSARY_FIELD_BIRTHDAY) => {
+  const celebrants = people.filter((person) => {
+    return person[anniversaryField] && (new Date(person[anniversaryField])).getMonth() === (new Date(Date.now())).getMonth();
   });
-}
 
-export const getBirthdayCelebrantsList = (celebrants) => {
   return celebrants.map((celebrant) => {
-    const birthDate = new Date(celebrant.dob);
+    const birthDate = new Date(celebrant[anniversaryField]);
     const fullname = `${celebrant.firstname} ${celebrant.surname}`;
     const birthday = `${getOrdinalSuffix(dayjs(birthDate).format('D'))} ${dayjs(birthDate).format('MMMM')}`;
     return `${birthday} - ${fullname}`;

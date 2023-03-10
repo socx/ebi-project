@@ -244,7 +244,8 @@
       "firstname": "Oyediran",
       "middlename": "Olawale",
       "surname": "Oderinde",
-      "dob": "1977-11-21"
+      "dob": "1977-11-21",
+      "dow": "2011-10-15"
   },
 
   {
@@ -257,7 +258,8 @@
     "firstname": "Sola",
     "middlename": "Olusegun",
     "surname": "Oderinde",
-    "dob": "1980-08-07"
+    "dob": "1980-08-07",
+    "dow": "2012-08-10"
   },
   {
     "id": 304,
@@ -309,7 +311,8 @@
     "middlename": "",
     "surname": "Oderinde",
     "maidenname": "Omaghomi",
-    "dob": "1979-04-13"
+    "dob": "1979-04-13",
+    "dow": "2011-10-15"
   },
   {
     "id": 313,
@@ -323,7 +326,8 @@
     "middlename": "Adesola",
     "surname": "Oderinde",
     "maidenname": "Ajibola",
-    "dob": "1982-09-26"
+    "dob": "1982-09-26",
+    "dow": "2012-08-10"
   },
   {
     "id": 314,

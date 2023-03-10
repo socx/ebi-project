@@ -131,12 +131,3 @@ FamilyTree.templates.family_single_male = Object.assign({}, FamilyTree.templates
 FamilyTree.templates.family_single_male.link = '<path stroke-linejoin="round" stroke="#aeaeae" stroke-width="2px" fill="none" d="{rounded}" />';
 FamilyTree.templates.family_single_female = Object.assign({}, FamilyTree.templates.single_female);
 FamilyTree.templates.family_single_female.link = '<path stroke-linejoin="round" stroke="#aeaeae" stroke-width="2px" fill="none" d="{rounded}" />';
-
-
-
-{/* <use xlink:href="#heart" x="' + args.p.xa + '" y="' + args.p.ya + '"/> */}
-// family.on('render-link', function (sender, args) {
-//   if (args.cnode.ppid != undefined) {
-//       args.html += '<use xlink:href="#heart" x="' + args.p.xa + '" y="' + args.p.ya + '"/>';
-//   }
-// });

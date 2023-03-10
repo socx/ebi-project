@@ -4,7 +4,14 @@ import ToastContainer from 'react-bootstrap/ToastContainer';
 
 
 const AnniversaryToasterComponent = (props) => {
-  const { anniversaryCelebrants, birthdayCelebrants, isAnniversaryToasterVisible, isBirthdayToasterVisible, setIsBirthdayToasterVisible } = props;
+  const {
+    anniversaryCelebrants,
+    birthdayCelebrants,
+    isAnniversaryToasterVisible,
+    isBirthdayToasterVisible,
+    setIsAnniversaryToasterVisible,
+    setIsBirthdayToasterVisible
+  } = props;
   const birthdayList = birthdayCelebrants && birthdayCelebrants.length &&
     birthdayCelebrants.map((celebrant, index) => {
       return <li key={index}>{celebrant}</li>
@@ -18,7 +25,7 @@ const AnniversaryToasterComponent = (props) => {
   return (
     <>
       <ToastContainer position={'middle-center'}>
-        {birthdayCelebrants && birthdayCelebrants.length &&
+        {birthdayCelebrants && birthdayCelebrants.length > 0 &&
           <Toast bg={'dark'}
             onClose={setIsBirthdayToasterVisible}
             show={isBirthdayToasterVisible}
@@ -36,9 +43,9 @@ const AnniversaryToasterComponent = (props) => {
             </Toast.Body>
           </Toast>
         }
-        {anniversaryCelebrants && anniversaryCelebrants.length &&
+        {anniversaryCelebrants && anniversaryCelebrants.length > 0 &&
           <Toast bg={'dark'}
-            onClose={setIsBirthdayToasterVisible}
+            onClose={setIsAnniversaryToasterVisible}
             show={isAnniversaryToasterVisible}
           >
             <Toast.Header>

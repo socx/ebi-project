@@ -25,13 +25,12 @@ export default class FamilyTreeComponent extends Component {
         const { nodes, selectedZoom } = this.props;
         this.family = new FamilyTree (this.divRef.current , {
             nodes: nodes,
-            template: "main",
+            template: 'main',
             scaleInitial: selectedZoom === 0.1 ? FamilyTree.match.boundary : selectedZoom,
             mouseScrool: FamilyTree.action.none,
             nodeMenu: {
-                details: { text: "Details" }
+                details: { text: 'Details' }
             },
-            orderBy: "id",
             editForm: {
                 generateElementsFromFields: false,
                 elements: [
@@ -57,40 +56,40 @@ export default class FamilyTreeComponent extends Component {
                     remove: null
                 }
             },
-            orderBy: "orderId",
+            orderBy: 'orderId',
             tags: {
-                "single_male": {
-                    template: "single_male"
+                'single_male': {
+                    template: 'single_male'
                 },
-                "single_female": {
-                    template: "single_female"
+                'single_female': {
+                    template: 'single_female'
                 },
-                "main_female_child": {
-                    template: "main_female_child"
+                'main_female_child': {
+                    template: 'main_female_child'
                 },
-                "main_male_child": {
-                    template: "main_male_child"
+                'main_male_child': {
+                    template: 'main_male_child'
                 },
-                "family_single_female": {
-                    template: "family_single_female"
+                'family_single_female': {
+                    template: 'family_single_female'
                 },
-                "family_single_male": {
-                    template: "family_single_male"
+                'family_single_male': {
+                    template: 'family_single_male'
                 },
             },
             nodeBinding: {
-                field_relation: "relationship",
-                field_name: "name",
-                field_bdate: "lifetime", //or use bdate
-                field_id: "id",
-                img_0: "img",
+                field_relation: 'relationship',
+                field_name: 'name',
+                field_bdate: 'lifetime', //or use bdate
+                field_id: 'id',
+                img_0: 'img',
               }
         });
     }
 
     render() {
         return (
-            <div id="tree" ref={this.divRef}></div>
+            <div id='tree' ref={this.divRef}></div>
         );
     }
 }

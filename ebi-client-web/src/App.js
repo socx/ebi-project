@@ -6,7 +6,7 @@ import NavigationComponent from './components/NavigationComponent';
 import BirthDayToasterComponent from './components/BirthDayToasterComponent'; 
 
 import { API_ROOT, REMOTE_API_ROOT } from './constants/utils';
-import { getMonthlyBirthdayCelebrants } from './utils/utils';
+import { getMonthlyBirthdayCelebrants, getBirthdayCelebrantsList } from './utils/utils';
 
 import './App.css';
 
@@ -47,11 +47,12 @@ export default class AppMe extends Component {
       .then((json) => {
         const familyTreeNodes = json;
         const monthlyBirthdayCelebrants = getMonthlyBirthdayCelebrants(json);
-        const isBirthdayToasterVisible = monthlyBirthdayCelebrants.length >0;
+        const birthdayCelebrants = getBirthdayCelebrantsList(monthlyBirthdayCelebrants);
+        const isBirthdayToasterVisible = birthdayCelebrants.length >0;
         
         this.setState({
           familyTreeNodes,
-          monthlyBirthdayCelebrants,
+          birthdayCelebrants,
           isBirthdayToasterVisible
         });
       });
@@ -62,19 +63,20 @@ export default class AppMe extends Component {
       familyTreeNodes,
       isDemoModalVisible,
       isBirthdayToasterVisible,
-      monthlyBirthdayCelebrants,
+      birthdayCelebrants,
       selectedZoom
     } = this.state;
 
     return (
       <>
         <NavigationComponent
+          data-testid='navigation-component'
           setIsDemoModalVisible={this.setIsDemoModalVisible}
           selectedZoomChanged={this.selectedZoomChanged}
         />
 
         <div className="flex-container">
-          <h1 className="text-center text-light">Family Tree</h1>
+          <h1 className="text-center text-light" data-testid='page-title'>Family Tree</h1>
         </div>
         <div style={{height: '100%'}}>
           {familyTreeNodes && familyTreeNodes.length &&
@@ -88,11 +90,14 @@ export default class AppMe extends Component {
           show={isDemoModalVisible}
           onHide={() => this.setIsDemoModalVisible(false)}
         />
-        <BirthDayToasterComponent
-          setIsBirthdayToasterVisible={() => this.setIsBirthdayToasterVisible(false)}
-          isBirthdayToasterVisible={isBirthdayToasterVisible}
-          monthlyBirthdayCelebrants={monthlyBirthdayCelebrants}
-        />
+        {birthdayCelebrants && birthdayCelebrants.length &&
+           <BirthDayToasterComponent
+           setIsBirthdayToasterVisible={() => this.setIsBirthdayToasterVisible(false)}
+           isBirthdayToasterVisible={isBirthdayToasterVisible}
+           birthdayCelebrants={birthdayCelebrants}
+         />
+        }
+       
       </>
     );
   }

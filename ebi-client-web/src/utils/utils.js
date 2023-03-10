@@ -1,3 +1,5 @@
+import * as dayjs from 'dayjs'
+
 export const checkIfImageExists = (url, callback) => {
   const img = new Image();
   img.src = url;
@@ -16,7 +18,7 @@ export const checkIfImageExists = (url, callback) => {
 }
 
 export const isBirthdayCurrentMonth = (date) => {
-  return date.getMonth() === (new Date()).getMonth();
+  return date.getMonth() === (new Date(Date.now())).getMonth();
 }
 
 export const getMonthlyBirthdayCelebrants = (people) => {
@@ -25,16 +27,25 @@ export const getMonthlyBirthdayCelebrants = (people) => {
   });
 }
 
+export const getBirthdayCelebrantsList = (celebrants) => {
+  return celebrants.map((celebrant) => {
+    const birthDate = new Date(celebrant.dob);
+    const fullname = `${celebrant.firstname} ${celebrant.surname}`;
+    const birthday = `${getOrdinalSuffix(dayjs(birthDate).format('D'))} ${dayjs(birthDate).format('MMMM')}`;
+    return `${birthday} - ${fullname}`;
+  });
+}
+
 export const getOrdinalSuffix = (number)  => {
-  const j = number % 10;
-  const k = number % 100;
-  if (j == 1 && k != 11) {
+  const modulusTen = number % 10;
+  const modulusHundred = number % 100;
+  if (modulusTen === 1 && modulusHundred !== 11) {
     return `${number}st`;
   }
-  if (j == 2 && k != 12) {
+  if (modulusTen === 2 && modulusHundred !== 12) {
     return `${number}nd`;
   }
-  if (j == 3 && k != 13) {
+  if (modulusTen === 3 && modulusHundred !== 13) {
     return `${number}rd`;
   }
   return `${number}th`;

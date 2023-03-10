@@ -19,6 +19,7 @@ const NavigationComponent = ({selectedZoomChanged, setIsDemoModalVisible}) => {
         <Container fluid>
           <Navbar.Brand href="#home">
             <img
+              data-testid="navbar-brand-image"
               alt=""
               src={require('./../images/logo.svg')}
               width="30"

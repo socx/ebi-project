@@ -41,7 +41,8 @@ export default class FamilyTreeComponent extends Component {
                     { type: 'textbox', label: 'Maiden Name', binding: 'maidenname'},
                     { type: 'textbox', label: 'Gender', binding: 'gender'},
                     { type: 'textbox', label: 'Date of Birth', binding: 'bdate'},
-                    { type: 'textbox', label: 'Date of Death', binding: 'dod'}     
+                    { type: 'textbox', label: 'Date of Wedding', binding: 'wdate'},
+                    { type: 'textbox', label: 'Date of Death', binding: 'ddate'}     
                 ],
                 buttons: {
                     edit: null,

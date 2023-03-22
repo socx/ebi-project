@@ -5,6 +5,7 @@ import DemoModalComponent from './components/DemoModalComponent';
 import NavigationComponent from './components/NavigationComponent';
 import BirthDayToasterComponent from './components/AnniversaryToasterComponent'; 
 
+
 import {
   ANNIVERSARY_FIELD_BIRTHDAY,
   ANNIVERSARY_FIELD_WEDDING,
@@ -116,7 +117,11 @@ export default class AppMe extends Component {
            setIsBirthdayToasterVisible={() => this.setIsBirthdayToasterVisible(false)}
          />
         }
-       
+        <footer class="footer mt-auto py-3 bg-dark">
+          <div class="container">
+            <span class="text-muted">Copyright 2023 &nbsp;</span>
+          </div>
+        </footer>
       </>
     );
   }

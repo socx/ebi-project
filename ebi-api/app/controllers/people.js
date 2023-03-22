@@ -16,6 +16,8 @@ exports.getFamilyTree = async (req, res) => {
       ...person,
       name: `${getFullName(person)}`,
       bdate: `${getBDate(person.dob)}`,
+      ddate: `${getBDate(person.dod)}`,
+      wdate: `${getBDate(person.dow)}`,
       lifetime: `${person.dod ? getLifetime({dob: person.dob, dod: person.dod}) : getBDate(person.dob)}`,
       img: `${req.protocol}://${req.get('host')}/images/${person.id}.jpg`
     }));

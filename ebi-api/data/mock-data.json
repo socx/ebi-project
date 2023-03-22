@@ -118,7 +118,8 @@
     "firstname": "Emmanuel",
     "middlename": "Oyelowo",
     "surname": "Oderinde",
-    "dob": "1947-10-01"
+    "dob": "1947-10-01",
+    "dow": "1975-09-06"
   },
   {
     "orderId": 3,
@@ -205,6 +206,7 @@
     "surname": "Oderinde",
     "maidenname": "Akingbehin",
     "dob": "1952-04-28",
+    "dow": "1975-09-06",
     "dod": "2023-01-16"
   },
   { "id": 218,
@@ -901,7 +903,7 @@
     "firstname": "Ayanfe",
     "middlename": "",
     "surname": "Olabode-Dada",
-    "dob": "2022-04-27"
+    "dob": "2022-03-22"
   }, 
 
   {
